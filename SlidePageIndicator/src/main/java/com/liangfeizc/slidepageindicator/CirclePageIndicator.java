@@ -1,4 +1,4 @@
-package com.liangfeizc.screenslidepager;
+package com.liangfeizc.slidepageindicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -70,19 +70,19 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.leftMargin = indicatorSpacing;
             params.rightMargin = indicatorSpacing;
-            img.setImageResource(R.mipmap.circle_indicator_stroke);
+            img.setImageResource(R.drawable.circle_indicator_stroke);
             addView(img, params);
         }
 
         if (count > 0) {
-            ((ImageView) getChildAt(0)).setImageResource(R.mipmap.home_circle_full);
+            ((ImageView) getChildAt(0)).setImageResource(R.drawable.circle_indicator_solid);
         }
     }
 
     private void updateIndicator(int position) {
         if (activePosition != position) {
-            ((ImageView) getChildAt(activePosition)).setImageResource(R.mipmap.circle_indicator_stroke);
-            ((ImageView) getChildAt(position)).setImageResource(R.mipmap.home_circle_full);
+            ((ImageView) getChildAt(activePosition)).setImageResource(R.drawable.circle_indicator_stroke);
+            ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_solid);
             activePosition = position;
         }
     }

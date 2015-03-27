@@ -7,30 +7,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.liangfeizc.slidepageindicator.CirclePageIndicator;
+
 import java.util.Arrays;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private static final String[] IMAGES = new String[] {
-            "http://www.japantoday.com/images/size/x/2011/07/makih.jpg",
+            "http://images.qianlong.com/mmsource/imghylanda/201108/25/21/7131919880274907937.jpg",
             "http://i48.tinypic.com/ipqddt.jpg",
-            "http://i47.tinypic.com/30xhk5l.jpg",
-            "http://i48.tinypic.com/11wbib8.jpg",
+            "http://photocdn.sohu.com/20110223/Img279487938.jpg",
+            "http://photocdn.sohu.com/20100609/Img272666987.jpg",
+            "http://pic11.nipic.com/20101205/5311590_013818784193_2.jpg",
+            "http://www.people.com.cn/mediafile/pic/20150122/18/16165324206901040562.jpg"
     };
 
     private ViewPager pager;
-    private ScreenSlidePagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setContentView(R.layout.activity_main);
         pager = (ViewPager) findViewById(R.id.pager);
 
+        ScreenSlidePagerAdapter pagerAdapter =
+                new ScreenSlidePagerAdapter(getSupportFragmentManager());
 
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addAll(Arrays.asList(IMAGES));
 
         pager.setAdapter(pagerAdapter);
@@ -42,7 +46,8 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(MainActivity.this, "Page No " + position + " in activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, position + "Page in activity",
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
