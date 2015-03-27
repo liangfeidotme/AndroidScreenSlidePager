@@ -8,8 +8,21 @@ Full screen slide pager to display images fetched from Internet by Picasso
 The indicator below ScreenSlidePager has been extracted as a separate single aar.
 So it can be used independently as following.
 
+### Gradle
+
+```groovy
+compile 'com.liangfeizc:SlidePageIndicator:1.0.0@aar'
 ```
-compile "com.liangfeizc.slidepageindicator:SlidePageIndicator:1.0.0@aar"
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>com.liangfeizc</groupId>
+    <artifactId>SlidePageIndicator</artifactId>
+    <version>1.0.0</version>
+    <type>aar</type>
+</dependency>
 ```
 
 ## how to use
@@ -18,7 +31,7 @@ compile "com.liangfeizc.slidepageindicator:SlidePageIndicator:1.0.0@aar"
 
 You can use `android:gravity` to position the `CirclePageIndicator` and use `app:indicator_spacing` to adjust the spacing between two adjencent circle indicators.
 
-    ```
+    ```xml
     <merge xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
         <android.support.v4.view.ViewPager
