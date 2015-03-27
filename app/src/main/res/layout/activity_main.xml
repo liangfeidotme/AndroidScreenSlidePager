@@ -6,7 +6,7 @@
         android:layout_height="match_parent" />
     <com.liangfeizc.screenslidepager.CirclePageIndicator
         android:id="@+id/indicator"
-        android:gravity="bottom|start"
+        android:gravity="bottom|center_horizontal"
         tmall:indicator_spacing="5dp"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"

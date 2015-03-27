@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(MainActivity.this, "I am in activity" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Page No " + position + " in activity", Toast.LENGTH_SHORT).show();
             }
 
             @Override
