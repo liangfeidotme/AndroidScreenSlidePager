@@ -1,14 +1,14 @@
 package com.liangfeizc.screenslidepager;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
  * Created by liangfei on 3/26/15.
@@ -29,12 +29,13 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
-        ImageView picView = (ImageView) rootView.findViewById(R.id.pic);
+
+        SimpleDraweeView view = (SimpleDraweeView) rootView.findViewById(R.id.pic);
 
         Bundle arguments = getArguments();
         if (arguments != null) {
             String url = arguments.getString(PIC_URL);
-            Picasso.with(getActivity()).load(url).into(picView);
+            view.setImageURI(Uri.parse(url));
         }
         return rootView;
     }

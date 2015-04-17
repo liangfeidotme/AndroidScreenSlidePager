@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.DraweeView;
 import com.liangfeizc.slidepageindicator.CirclePageIndicator;
 
 import java.util.Arrays;
@@ -28,6 +30,8 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Fresco.initialize(this);
 
         setContentView(R.layout.activity_main);
         pager = (ViewPager) findViewById(R.id.pager);
