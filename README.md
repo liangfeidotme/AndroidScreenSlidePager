@@ -53,4 +53,4 @@ You can use `android:gravity` to position the `CirclePageIndicator` and use `app
 
 ## dependencies
 
-* Picasso
+* [Fresco](https://github.com/facebook/fresco)
