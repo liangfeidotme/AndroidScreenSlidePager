@@ -13,7 +13,7 @@ Your can add it to your dependecies to use it independently.
 ### Gradle
 
 ```groovy
-compile 'com.liangfeizc:SlidePageIndicator:1.0.0@aar'
+compile 'com.liangfeizc:SlidePageIndicator:1.1.0@aar'
 ```
 
 ### Maven
