@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
@@ -19,10 +20,15 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
 
     public static final int DEFAULT_INDICATOR_SPACING = 5;
 
-    private int activePosition;
-    private int indicatorSpacing;
+    public static final int INDICATOR_TYPE_CIRCLE = 0;
+    public static final int INDICATOR_TYPE_FRACTION = 1;
+    public static final int DEFAULT_INDICATOR_TYPE = INDICATOR_TYPE_CIRCLE;
 
-    private ViewPager.OnPageChangeListener userDefinedPageChangeListener;
+    private int mActivePosition;
+    private int mIndicatorSpacing;
+    private int mIndicatorType;
+
+    private ViewPager.OnPageChangeListener mUserDefinedPageChangeListener;
 
     public CirclePageIndicator(Context context) {
         this(context, null);
@@ -38,8 +44,12 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs, R.styleable.CirclePageIndicator, 0, 0);
         try {
-            indicatorSpacing = a.getDimensionPixelSize(
-                    R.styleable.CirclePageIndicator_indicator_spacing, DEFAULT_INDICATOR_SPACING);
+            mIndicatorSpacing = a.getDimensionPixelSize(
+                    R.styleable.CirclePageIndicator_indicator_spacing,
+                    DEFAULT_INDICATOR_SPACING);
+            mIndicatorType = a.getInt(
+                    R.styleable.CirclePageIndicator_indicator_type,
+                    DEFAULT_INDICATOR_TYPE);
         } finally {
             a.recycle();
         }
@@ -58,32 +68,45 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
     }
 
     public void setViewPager(ViewPager pager) {
-        userDefinedPageChangeListener = getOnPageChangeListener(pager);
+        mUserDefinedPageChangeListener = getOnPageChangeListener(pager);
         pager.setOnPageChangeListener(this);
         addIndicator(pager.getAdapter().getCount());
     }
 
     private void addIndicator(int count) {
-        for (int i = 0;  i < count; i++) {
-            ImageView img = new ImageView(getContext());
+        if (count <= 0) return;
+        if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
+            for (int i = 0; i < count; i++) {
+                ImageView img = new ImageView(getContext());
+                LayoutParams params = new LayoutParams(
+                        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                params.leftMargin = mIndicatorSpacing;
+                params.rightMargin = mIndicatorSpacing;
+                img.setImageResource(R.drawable.circle_indicator_stroke);
+                addView(img, params);
+            }
+            ((ImageView) getChildAt(0)).setImageResource(R.drawable.circle_indicator_solid);
+        } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
+            TextView textView = new TextView(getContext());
+            textView.setTag(count);
             LayoutParams params = new LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.leftMargin = indicatorSpacing;
-            params.rightMargin = indicatorSpacing;
-            img.setImageResource(R.drawable.circle_indicator_stroke);
-            addView(img, params);
-        }
-
-        if (count > 0) {
-            ((ImageView) getChildAt(0)).setImageResource(R.drawable.circle_indicator_solid);
+            textView.setText("1/" + count);
+            addView(textView, params);
         }
     }
 
     private void updateIndicator(int position) {
-        if (activePosition != position) {
-            ((ImageView) getChildAt(activePosition)).setImageResource(R.drawable.circle_indicator_stroke);
-            ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_solid);
-            activePosition = position;
+        if (mActivePosition != position) {
+            if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
+                ((ImageView) getChildAt(mActivePosition)).setImageResource(R.drawable.circle_indicator_stroke);
+                ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_solid);
+            } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
+                TextView textView = (TextView) getChildAt(0);
+                //noinspection RedundantCast
+                textView.setText(String.format("%d/%d", position + 1, (int) textView.getTag()));
+            }
+            mActivePosition = position;
         }
     }
 
@@ -100,30 +123,25 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
         return null;
     }
 
-    private int dp2px(float dpValue) {
-        return (int) (dpValue * getContext().getResources().getDisplayMetrics().density);
-    }
-
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (userDefinedPageChangeListener != null) {
-            userDefinedPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+        if (mUserDefinedPageChangeListener != null) {
+            mUserDefinedPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
         }
     }
 
     @Override
     public void onPageSelected(int position) {
         updateIndicator(position);
-        if (userDefinedPageChangeListener != null) {
-            userDefinedPageChangeListener.onPageSelected(position);
+        if (mUserDefinedPageChangeListener != null) {
+            mUserDefinedPageChangeListener.onPageSelected(position);
         }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        if (userDefinedPageChangeListener != null) {
-            userDefinedPageChangeListener.onPageScrollStateChanged(state);
+        if (mUserDefinedPageChangeListener != null) {
+            mUserDefinedPageChangeListener.onPageScrollStateChanged(state);
         }
     }
 }

@@ -1,5 +1,5 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tmall="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -7,7 +7,8 @@
     <com.liangfeizc.slidepageindicator.CirclePageIndicator
         android:id="@+id/indicator"
         android:gravity="bottom|center_horizontal"
-        tmall:indicator_spacing="5dp"
+        app:indicator_spacing="5dp"
+        app:indicator_type="fraction"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"

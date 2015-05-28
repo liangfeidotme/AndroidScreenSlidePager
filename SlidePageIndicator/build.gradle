@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.0.0"
+version = "1.1.0"
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
-    resourcePrefix "flowlayout_"
+    // resourcePrefix "flowlayout_"
 
     defaultConfig {
         minSdkVersion 16
@@ -35,7 +35,7 @@ install {
                 packaging 'aar'
 
                 // Add your description here
-                name 'Full screen slide pager to display images fetched from Internet by Picasso'
+                name 'Full screen slide pager to display images fetched from Internet by Fresco'
                 url siteUrl
 
                 // Set your license

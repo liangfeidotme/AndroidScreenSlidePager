@@ -22,7 +22,7 @@ compile 'com.liangfeizc:SlidePageIndicator:1.0.0@aar'
 <dependency>
     <groupId>com.liangfeizc</groupId>
     <artifactId>SlidePageIndicator</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <type>aar</type>
 </dependency>
 ```
