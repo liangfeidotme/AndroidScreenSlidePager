@@ -17,16 +17,39 @@ import java.lang.reflect.Field;
  * Created by liangfei on 3/26/15.
  */
 public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
+    public static final int INDICATOR_TYPE_CIRCLE = 0;
+    public static final int INDICATOR_TYPE_FRACTION = 1;
+
+    public enum IndicatorType {
+        CIRCLE(INDICATOR_TYPE_CIRCLE),
+        FRACTION(INDICATOR_TYPE_FRACTION),
+        UNKNOWN(-1);
+
+        private int type;
+        IndicatorType(int type) {
+            this.type = type;
+        }
+
+        public static IndicatorType of(int value) {
+            switch (value) {
+                case INDICATOR_TYPE_CIRCLE:
+                    return CIRCLE;
+                case INDICATOR_TYPE_FRACTION:
+                    return FRACTION;
+                default:
+                    return UNKNOWN;
+            }
+        }
+    }
 
     public static final int DEFAULT_INDICATOR_SPACING = 5;
 
-    public static final int INDICATOR_TYPE_CIRCLE = 0;
-    public static final int INDICATOR_TYPE_FRACTION = 1;
-    public static final int DEFAULT_INDICATOR_TYPE = INDICATOR_TYPE_CIRCLE;
-
-    private int mActivePosition;
+    private int mActivePosition = -1;
     private int mIndicatorSpacing;
-    private int mIndicatorType;
+    private boolean mIndicatorTypeChanged = false;
+
+    private IndicatorType mIndicatorType = IndicatorType.of(INDICATOR_TYPE_CIRCLE);
+    private ViewPager mViewPager;
 
     private ViewPager.OnPageChangeListener mUserDefinedPageChangeListener;
 
@@ -47,9 +70,10 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
             mIndicatorSpacing = a.getDimensionPixelSize(
                     R.styleable.CirclePageIndicator_indicator_spacing,
                     DEFAULT_INDICATOR_SPACING);
-            mIndicatorType = a.getInt(
+            int indicatorTypeValue = a.getInt(
                     R.styleable.CirclePageIndicator_indicator_type,
-                    DEFAULT_INDICATOR_TYPE);
+                    mIndicatorType.type);
+            mIndicatorType = IndicatorType.of(indicatorTypeValue);
         } finally {
             a.recycle();
         }
@@ -68,14 +92,28 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
     }
 
     public void setViewPager(ViewPager pager) {
+        mViewPager = pager;
         mUserDefinedPageChangeListener = getOnPageChangeListener(pager);
         pager.setOnPageChangeListener(this);
-        addIndicator(pager.getAdapter().getCount());
+        setIndicatorType(mIndicatorType);
+    }
+
+    public void setIndicatorType(IndicatorType indicatorType) {
+        mIndicatorType = indicatorType;
+        mIndicatorTypeChanged = true;
+        if (mViewPager != null) {
+            addIndicator(mViewPager.getAdapter().getCount());
+        }
+    }
+
+    private void removeIndicator() {
+        removeAllViews();
     }
 
     private void addIndicator(int count) {
+        removeIndicator();
         if (count <= 0) return;
-        if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
+        if (mIndicatorType == IndicatorType.CIRCLE) {
             for (int i = 0; i < count; i++) {
                 ImageView img = new ImageView(getContext());
                 LayoutParams params = new LayoutParams(
@@ -85,23 +123,25 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
                 img.setImageResource(R.drawable.circle_indicator_stroke);
                 addView(img, params);
             }
-            ((ImageView) getChildAt(0)).setImageResource(R.drawable.circle_indicator_solid);
-        } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
+        } else if (mIndicatorType == IndicatorType.FRACTION) {
             TextView textView = new TextView(getContext());
             textView.setTag(count);
             LayoutParams params = new LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            textView.setText("1/" + count);
             addView(textView, params);
         }
+        updateIndicator(mViewPager.getCurrentItem());
     }
 
     private void updateIndicator(int position) {
-        if (mActivePosition != position) {
-            if (mIndicatorType == INDICATOR_TYPE_CIRCLE) {
-                ((ImageView) getChildAt(mActivePosition)).setImageResource(R.drawable.circle_indicator_stroke);
-                ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_solid);
-            } else if (mIndicatorType == INDICATOR_TYPE_FRACTION) {
+        if (mIndicatorTypeChanged || mActivePosition != position) {
+            mIndicatorTypeChanged = false;
+            if (mIndicatorType == IndicatorType.CIRCLE) {
+                ((ImageView) getChildAt(mActivePosition))
+                        .setImageResource(R.drawable.circle_indicator_stroke);
+                ((ImageView) getChildAt(position))
+                        .setImageResource(R.drawable.circle_indicator_solid);
+            } else if (mIndicatorType == IndicatorType.FRACTION) {
                 TextView textView = (TextView) getChildAt(0);
                 //noinspection RedundantCast
                 textView.setText(String.format("%d/%d", position + 1, (int) textView.getTag()));
@@ -126,7 +166,8 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (mUserDefinedPageChangeListener != null) {
-            mUserDefinedPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            mUserDefinedPageChangeListener.onPageScrolled(position, positionOffset,
+                    positionOffsetPixels);
         }
     }
 

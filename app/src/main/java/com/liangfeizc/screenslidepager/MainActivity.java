@@ -25,7 +25,9 @@ public class MainActivity extends ActionBarActivity {
             "http://www.people.com.cn/mediafile/pic/20150122/18/16165324206901040562.jpg"
     };
 
+
     private ViewPager pager;
+    private CirclePageIndicator mPageIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +62,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
+        mPageIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
+        mPageIndicator.setViewPager(pager);
     }
 
 
@@ -83,16 +85,14 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_indicator_circle:
+                mPageIndicator.setIndicatorType(CirclePageIndicator.IndicatorType.CIRCLE);
+                break;
+            case R.id.action_indicator_fraction:
+                mPageIndicator.setIndicatorType(CirclePageIndicator.IndicatorType.FRACTION);
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
