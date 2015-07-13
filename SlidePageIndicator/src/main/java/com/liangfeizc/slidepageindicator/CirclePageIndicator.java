@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 
 /**
- * Created by liangfei on 3/26/15.
+ * Created by liangfeizc on 3/26/15.
  */
 public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
     public static final int INDICATOR_TYPE_CIRCLE = 0;

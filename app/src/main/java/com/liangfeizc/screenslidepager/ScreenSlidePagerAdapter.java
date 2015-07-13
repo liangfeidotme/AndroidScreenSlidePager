@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by liangfei on 3/26/15.
+ * Created by liangfeizc on 3/26/15.
  */
 public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     private List<String> picList = new ArrayList<>();

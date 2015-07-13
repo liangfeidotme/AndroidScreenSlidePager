@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 /**
- * Created by liangfei on 3/26/15.
+ * Created by liangfeizc on 3/26/15.
  */
 public class ScreenSlidePageFragment extends Fragment {
     private static final String PIC_URL = "screenslidepagefragment.picurl";
