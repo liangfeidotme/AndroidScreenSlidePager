@@ -1,1 +1,1 @@
-include ':app', ':SlidePageIndicator'
+include ':screenslidepager', ':SlidePageIndicator'

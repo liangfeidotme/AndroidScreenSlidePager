@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.DraweeView;
 import com.liangfeizc.slidepageindicator.CirclePageIndicator;
 
 import java.util.Arrays;
@@ -26,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
     };
 
 
-    private ViewPager pager;
+    private ViewPager mPager;
     private CirclePageIndicator mPageIndicator;
 
     @Override
@@ -36,15 +35,15 @@ public class MainActivity extends ActionBarActivity {
         Fresco.initialize(this);
 
         setContentView(R.layout.activity_main);
-        pager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pager);
 
         ScreenSlidePagerAdapter pagerAdapter =
                 new ScreenSlidePagerAdapter(getSupportFragmentManager());
 
         pagerAdapter.addAll(Arrays.asList(IMAGES));
 
-        pager.setAdapter(pagerAdapter);
-        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mPager.setAdapter(pagerAdapter);
+        mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -63,16 +62,16 @@ public class MainActivity extends ActionBarActivity {
         });
 
         mPageIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
-        mPageIndicator.setViewPager(pager);
+        mPageIndicator.setViewPager(mPager);
     }
 
 
     @Override
     public void onBackPressed() {
-        if (pager.getCurrentItem() == 0) {
+        if (mPager.getCurrentItem() == 0) {
             super.onBackPressed();
         } else {
-            pager.setCurrentItem(pager.getCurrentItem() - 1);
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
 
