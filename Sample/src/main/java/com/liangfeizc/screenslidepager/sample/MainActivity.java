@@ -47,8 +47,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void viewPictures(View view) {
         Intent intent = new Intent(this, SlidePagerActivity.class);
+        intent.putExtra(SlidePagerActivity.EXTRA_TITLE, "堀北真希の写真");
         intent.putExtra(SlidePagerActivity.EXTRA_PICTURES, IMAGES);
-
         startActivity(intent);
     }
 }

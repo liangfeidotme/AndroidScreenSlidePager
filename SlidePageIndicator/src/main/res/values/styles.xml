@@ -1,5 +1,5 @@
 <resources>
-    <declare-styleable name="CircleIndicator">
+    <declare-styleable name="PageIndicator">
         <attr name="indicator_spacing" format="dimension" />
         <attr name="indicator_type" format="enum">
             <enum name="circle" value="0" />

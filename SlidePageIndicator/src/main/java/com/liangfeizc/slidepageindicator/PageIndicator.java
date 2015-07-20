@@ -2,6 +2,7 @@ package com.liangfeizc.slidepageindicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -16,7 +17,7 @@ import java.lang.reflect.Field;
 /**
  * Created by liangfeizc on 3/26/15.
  */
-public class CircleIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
+public class PageIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
     public static final int INDICATOR_TYPE_CIRCLE = 0;
     public static final int INDICATOR_TYPE_FRACTION = 1;
 
@@ -51,25 +52,25 @@ public class CircleIndicator extends LinearLayout implements ViewPager.OnPageCha
     private IndicatorType mIndicatorType = IndicatorType.of(INDICATOR_TYPE_CIRCLE);
     private ViewPager mViewPager;
 
-    public CircleIndicator(Context context) {
+    public PageIndicator(Context context) {
         this(context, null);
     }
 
-    public CircleIndicator(Context context, AttributeSet attrs) {
+    public PageIndicator(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PageIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs, R.styleable.CircleIndicator, 0, 0);
+                attrs, R.styleable.PageIndicator, 0, 0);
         try {
             mIndicatorSpacing = a.getDimensionPixelSize(
-                    R.styleable.CircleIndicator_indicator_spacing,
+                    R.styleable.PageIndicator_indicator_spacing,
                     dp2px(context, DEFAULT_INDICATOR_SPACING));
             int indicatorTypeValue = a.getInt(
-                    R.styleable.CircleIndicator_indicator_type,
+                    R.styleable.PageIndicator_indicator_type,
                     mIndicatorType.type);
             mIndicatorType = IndicatorType.of(indicatorTypeValue);
         } finally {
@@ -122,6 +123,10 @@ public class CircleIndicator extends LinearLayout implements ViewPager.OnPageCha
             }
         } else if (mIndicatorType == IndicatorType.FRACTION) {
             TextView textView = new TextView(getContext());
+            textView.setTextColor(Color.WHITE);
+            int padding = dp2px(getContext(), 10);
+            textView.setPadding(padding, padding >> 1, padding, padding >> 1);
+            textView.setBackgroundResource(R.drawable.fraction_indicator_bg);
             textView.setTag(count);
             LayoutParams params = new LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
