@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ScreenSlidePager</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_indicator_circle">Circle Indicator</string>
+    <string name="action_indicator_fraction">Fraction Indicator</string>
+    <string name="title_activity_slide_pager">SlidePagerActivity</string>
+    <string name="action_about">About</string>
+</resources>

@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 /**
  * Created by liangfeizc on 3/26/15.
  */
-public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
+public class CircleIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
     public static final int INDICATOR_TYPE_CIRCLE = 0;
     public static final int INDICATOR_TYPE_FRACTION = 1;
 
@@ -51,27 +51,25 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
     private IndicatorType mIndicatorType = IndicatorType.of(INDICATOR_TYPE_CIRCLE);
     private ViewPager mViewPager;
 
-    private ViewPager.OnPageChangeListener mUserDefinedPageChangeListener;
-
-    public CirclePageIndicator(Context context) {
+    public CircleIndicator(Context context) {
         this(context, null);
     }
 
-    public CirclePageIndicator(Context context, AttributeSet attrs) {
+    public CircleIndicator(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CirclePageIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs, R.styleable.CirclePageIndicator, 0, 0);
+                attrs, R.styleable.CircleIndicator, 0, 0);
         try {
             mIndicatorSpacing = a.getDimensionPixelSize(
-                    R.styleable.CirclePageIndicator_indicator_spacing,
-                    DEFAULT_INDICATOR_SPACING);
+                    R.styleable.CircleIndicator_indicator_spacing,
+                    dp2px(context, DEFAULT_INDICATOR_SPACING));
             int indicatorTypeValue = a.getInt(
-                    R.styleable.CirclePageIndicator_indicator_type,
+                    R.styleable.CircleIndicator_indicator_type,
                     mIndicatorType.type);
             mIndicatorType = IndicatorType.of(indicatorTypeValue);
         } finally {
@@ -93,8 +91,7 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
 
     public void setViewPager(ViewPager pager) {
         mViewPager = pager;
-        mUserDefinedPageChangeListener = getOnPageChangeListener(pager);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
         setIndicatorType(mIndicatorType);
     }
 
@@ -150,6 +147,11 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
         }
     }
 
+    /**
+     * {@link android.support.v4.view.ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)} is deprecated.
+     * We could keep a list of listeners by {@link android.support.v4.view.ViewPager#addOnPageChangeListener(ViewPager.OnPageChangeListener)}.
+     */
+    @Deprecated
     private ViewPager.OnPageChangeListener getOnPageChangeListener(ViewPager pager) {
         try {
             Field f = pager.getClass().getDeclaredField("mOnPageChangeListener");
@@ -163,27 +165,23 @@ public class CirclePageIndicator extends LinearLayout implements ViewPager.OnPag
         return null;
     }
 
+    private int dp2px(Context context, int dpValue) {
+        return (int) context.getResources().getDisplayMetrics().density * dpValue;
+    }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (mUserDefinedPageChangeListener != null) {
-            mUserDefinedPageChangeListener.onPageScrolled(position, positionOffset,
-                    positionOffsetPixels);
-        }
+
     }
 
     @Override
     public void onPageSelected(int position) {
         updateIndicator(position);
-        if (mUserDefinedPageChangeListener != null) {
-            mUserDefinedPageChangeListener.onPageSelected(position);
-        }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        if (mUserDefinedPageChangeListener != null) {
-            mUserDefinedPageChangeListener.onPageScrollStateChanged(state);
-        }
+
     }
 }
 

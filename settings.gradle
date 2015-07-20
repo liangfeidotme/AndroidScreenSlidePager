@@ -1,1 +1,1 @@
-include ':SlidePager', ':SlidePageIndicator'
+include ':Sample', ':SlidePageIndicator', ':SlidePager'

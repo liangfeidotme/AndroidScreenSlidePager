@@ -1,19 +1,14 @@
-package com.liangfeizc.screenslidepager;
+package com.liangfeizc.screenslidepager.sample;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.liangfeizc.slidepageindicator.CirclePageIndicator;
-
-import java.util.Arrays;
+import com.liangfeizc.slidepager.SlidePagerActivity;
 
 
 public class MainActivity extends ActionBarActivity {

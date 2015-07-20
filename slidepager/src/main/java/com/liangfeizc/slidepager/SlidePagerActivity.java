@@ -1,21 +1,21 @@
-package com.liangfeizc.screenslidepager;
+package com.liangfeizc.slidepager;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.liangfeizc.slidepageindicator.CirclePageIndicator;
+import com.liangfeizc.slidepageindicator.CircleIndicator;
 
 import java.util.Arrays;
 
-public class SlidePagerActivity extends ActionBarActivity {
+public class SlidePagerActivity extends AppCompatActivity {
 
     public static final String EXTRA_PICTURES = "slidepageractivity.extra.pictures";
 
-    private CirclePageIndicator mPageIndicator;
+    private CircleIndicator mPageIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class SlidePagerActivity extends ActionBarActivity {
         pagerAdapter.addAll(Arrays.asList(pics));
 
         pager.setAdapter(pagerAdapter);
-        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -53,7 +53,7 @@ public class SlidePagerActivity extends ActionBarActivity {
             }
         });
 
-        mPageIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
+        mPageIndicator = (CircleIndicator) findViewById(R.id.indicator);
         mPageIndicator.setViewPager(pager);
     }
 
@@ -66,13 +66,11 @@ public class SlidePagerActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_indicator_circle:
-                mPageIndicator.setIndicatorType(CirclePageIndicator.IndicatorType.CIRCLE);
-                break;
-            case R.id.action_indicator_fraction:
-                mPageIndicator.setIndicatorType(CirclePageIndicator.IndicatorType.FRACTION);
-                break;
+        int id = item.getItemId();
+        if (id == R.id.action_indicator_circle) {
+            mPageIndicator.setIndicatorType(CircleIndicator.IndicatorType.CIRCLE);
+        } else if (id == R.id.action_indicator_fraction) {
+            mPageIndicator.setIndicatorType(CircleIndicator.IndicatorType.FRACTION);
         }
         return super.onOptionsItemSelected(item);
     }

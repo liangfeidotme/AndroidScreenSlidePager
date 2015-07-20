@@ -1,4 +1,4 @@
-package com.liangfeizc.screenslidepager;
+package com.liangfeizc.slidepager;
 
 import android.net.Uri;
 import android.os.Bundle;

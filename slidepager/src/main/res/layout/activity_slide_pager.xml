@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.liangfeizc.slidepageindicator.CirclePageIndicator
+    <com.liangfeizc.slidepageindicator.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
