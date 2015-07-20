@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ScreenSlidePager.iml" filepath="$PROJECT_DIR$/ScreenSlidePager.iml" />
       <module fileurl="file://$PROJECT_DIR$/SlidePageIndicator/SlidePageIndicator.iml" filepath="$PROJECT_DIR$/SlidePageIndicator/SlidePageIndicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/screenslidepager/screenslidepager.iml" filepath="$PROJECT_DIR$/screenslidepager/screenslidepager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlidePager/SlidePager.iml" filepath="$PROJECT_DIR$/SlidePager/SlidePager.iml" />
     </modules>
   </component>
 </project>

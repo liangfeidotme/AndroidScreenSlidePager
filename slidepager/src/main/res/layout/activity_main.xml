@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_purple"
+        android:gravity="center"
+        android:paddingBottom="50dp"
+        android:paddingTop="50dp"
+        android:text="べっぴんさん"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:onClick="viewPictures"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="写真を見る" />
+
+</LinearLayout>
