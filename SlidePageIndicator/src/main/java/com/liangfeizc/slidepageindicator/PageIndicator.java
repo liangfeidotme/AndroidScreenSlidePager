@@ -139,6 +139,11 @@ public class PageIndicator extends LinearLayout implements ViewPager.OnPageChang
         if (mIndicatorTypeChanged || mActivePosition != position) {
             mIndicatorTypeChanged = false;
             if (mIndicatorType == IndicatorType.CIRCLE) {
+                if (mActivePosition == -1){
+                    ((ImageView) getChildAt(position)).setImageResource(R.drawable.circle_indicator_solid);
+                    mActivePosition = position;
+                    return;
+                }
                 ((ImageView) getChildAt(mActivePosition))
                         .setImageResource(R.drawable.circle_indicator_stroke);
                 ((ImageView) getChildAt(position))
