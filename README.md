@@ -60,4 +60,4 @@ Check the [app](app) module for more details.
 * [Fresco](https://github.com/facebook/fresco)
 
 ## 欢迎关注我的微信公众号（Chinese only）
-![](https://cdn.nlark.com/yuque/0/2019/png/124977/1552294534293-9ae5a46a-df3c-4020-8096-a05534f53a0b.png)
+<img width="300px" src="https://cdn.nlark.com/yuque/0/2019/png/124977/1552294534293-9ae5a46a-df3c-4020-8096-a05534f53a0b.png">
