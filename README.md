@@ -1,5 +1,5 @@
 # PagerIndicator
-[ ![Download](https://api.bintray.com/packages/lyndonchin/maven/pagerindicator/images/download.svg?version=0.0.1) ](https://bintray.com/lyndonchin/maven/pagerindicator/0.0.1/link)
+[ ![Download](https://api.bintray.com/packages/lyndonchin/maven/pagerindicator/images/download.svg?version=0.0.2) ](https://bintray.com/lyndonchin/maven/pagerindicator/0.0.2/link)
 
 Pager (especially for ViewPager) indicator in two styles: circle & fraction.
 
