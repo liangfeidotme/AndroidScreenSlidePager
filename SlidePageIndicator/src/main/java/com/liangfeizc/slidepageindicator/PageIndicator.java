@@ -3,7 +3,7 @@ package com.liangfeizc.slidepageindicator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -158,8 +158,8 @@ public class PageIndicator extends LinearLayout implements ViewPager.OnPageChang
     }
 
     /**
-     * {@link android.support.v4.view.ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)} is deprecated.
-     * We could keep a list of listeners by {@link android.support.v4.view.ViewPager#addOnPageChangeListener(ViewPager.OnPageChangeListener)}.
+     * {@link ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)} is deprecated.
+     * We could keep a list of listeners by {@link ViewPager#addOnPageChangeListener(ViewPager.OnPageChangeListener)}.
      */
     @Deprecated
     private ViewPager.OnPageChangeListener getOnPageChangeListener(ViewPager pager) {

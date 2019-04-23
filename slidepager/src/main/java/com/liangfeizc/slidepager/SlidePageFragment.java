@@ -2,9 +2,9 @@ package com.liangfeizc.slidepager;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +32,7 @@ public class SlidePageFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_slide_page, container, false);
 
-        SimpleDraweeView view = (SimpleDraweeView) rootView.findViewById(R.id.pic);
+        SimpleDraweeView view = rootView.findViewById(R.id.pic);
 
         Bundle arguments = getArguments();
         if (arguments != null) {

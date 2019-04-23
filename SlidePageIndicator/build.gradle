@@ -1,17 +1,15 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-version = "1.1.0"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
-    // resourcePrefix "flowlayout_"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionCode 1
         versionName version
     }
@@ -23,88 +21,22 @@ android {
     }
 }
 
-def siteUrl = "https://github.com/LyndonChin/Android-ScreenSlidePager"
-def gitUrl = "https://github.com/LyndonChin/Android-ScreenSlidePager.git"
-group = "com.liangfeizc"
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper paramters
-        pom {
-            project {
-                packaging 'aar'
-
-                // Add your description here
-                name 'Full screen slide pager to display images fetched from Internet by Fresco'
-                url siteUrl
-
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'lyndonchin'
-                        name 'liangfei'
-                        email 'njliangfei@gmail.com'
-                    }
-                }
-
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.+'
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+publish {
+    def groupProjectID = 'me.liangfei'
+    def artifactProjectID = 'pageindicator'
+    def publishVersionID = '0.0.1'
+
+    userOrg = 'LyndonChin'
+    repoName = 'AndroidScreenSlidePager'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'page indicator for view pager'
+    website = 'https://github.com/LyndonChin/AndroidScreenSlidePager'
 }
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    configurations = ['archives']
-
-    pkg {
-        repo = "maven"
-        name = "CirclePageIndicator"
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-    }
-}
-
