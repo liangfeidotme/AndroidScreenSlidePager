@@ -1,35 +1,19 @@
-# Android-ScreenSlidePager
-Full screen slide pager to display images fetched from Internet by Picasso
+# ScreenSlidePager
+[ ![Download](https://api.bintray.com/packages/lyndonchin/maven/pagerindicator/images/download.svg?version=0.0.1) ](https://bintray.com/lyndonchin/maven/pagerindicator/0.0.1/link)
 
-## demo
+Pager (especially for ViewPager) indicator in two styles: circle & number.
+
+## Demo
 
 ![](art/sample.gif)
 
----
-
-### Indicator
-
-The indicator at the bottom of ScreenSlidePager has been extracted as an aar. 
-Your can add it to your dependecies to use it independently.
-
-#### Gradle
+## Dependency
 
 ```groovy
-compile 'com.liangfeizc:SlidePageIndicator:1.1.0@aar'
+compile 'me.liangfei:pagerindicator:0.0.1'
 ```
 
-#### Maven
-
-```xml
-<dependency>
-    <groupId>com.liangfeizc</groupId>
-    <artifactId>SlidePageIndicator</artifactId>
-    <version>1.1.0</version>
-    <type>aar</type>
-</dependency>
-```
-
-#### Usage
+## Usage
 
 `CirclePageIndicator` and `ViewPager` shoud be used as child views of a `Framelayout`. But here we used `merge` instead, because the root view in any activity is a `FrameLayout`.
 You can use `android:gravity` to position the `CirclePageIndicator` and use `app:indicator_spacing` to adjust the spacing between two adjencent circle indicators.

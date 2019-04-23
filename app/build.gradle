@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -7,6 +7,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
+        applicationId "com.liangfeizc.screenslidepager"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -21,10 +22,8 @@ android {
 }
 
 dependencies {
-//    implementation project(':SlidePageIndicator')
-    implementation 'me.liangfei:pagerindicator:0.0.1'
     implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.facebook.fresco:fresco:$fresco_version"
+    implementation project(':slidepager')
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

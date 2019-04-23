@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 28
@@ -10,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName version
     }
     buildTypes {
         release {
@@ -21,13 +22,21 @@ android {
 }
 
 dependencies {
-//    implementation project(':SlidePageIndicator')
-    implementation 'me.liangfei:pagerindicator:0.0.1'
     implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.facebook.fresco:fresco:$fresco_version"
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
-repositories {
-    mavenCentral()
+
+publish {
+    def groupProjectID = 'me.liangfei'
+    def artifactProjectID = 'pagerindicator'
+    def publishVersionID = '0.0.1'
+
+    userOrg = 'lyndonchin'
+    repoName = 'maven'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'page indicator for view pager'
+    website = 'https://github.com/LyndonChin/AndroidScreenSlidePager'
 }
