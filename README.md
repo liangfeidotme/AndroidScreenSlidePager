@@ -58,3 +58,6 @@ Check the [app](app) module for more details.
 
 ## dependencies
 * [Fresco](https://github.com/facebook/fresco)
+
+## 欢迎关注我的微信公众号（Chinese only）
+![](https://wx2.sinaimg.cn/mw690/63934de3gy1fpdr77kb6kj209k09kjrc.jpg)
