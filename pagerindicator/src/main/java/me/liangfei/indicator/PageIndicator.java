@@ -1,4 +1,4 @@
-package me.liangfei.slidepageindicator;
+package me.liangfei.indicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 
 /**
- * Created by liangfeizc on 3/26/15.
+ * Created by liangfei on 3/26/15.
  */
 public class PageIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
     public static final int INDICATOR_TYPE_CIRCLE = 0;

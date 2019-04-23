@@ -4,12 +4,13 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+import me.liangfei.indicator.PageIndicator;
+
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.liangfeizc.slidepageindicator.PageIndicator;
 
 import java.util.Arrays;
 

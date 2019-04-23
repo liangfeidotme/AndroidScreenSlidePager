@@ -21,8 +21,8 @@ android {
 }
 
 dependencies {
-//    implementation project(':SlidePageIndicator')
-    implementation 'me.liangfei:pagerindicator:0.0.1'
+//    implementation project(':pagerindicator')
+    implementation 'me.liangfei:pagerindicator:0.0.2'
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.facebook.fresco:fresco:$fresco_version"
     implementation "androidx.core:core-ktx:$core_ktx_version"

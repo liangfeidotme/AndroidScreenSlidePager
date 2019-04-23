@@ -30,7 +30,7 @@ dependencies {
 publish {
     def groupProjectID = 'me.liangfei'
     def artifactProjectID = 'pagerindicator'
-    def publishVersionID = '0.0.1'
+    def publishVersionID = '0.0.2'
 
     userOrg = 'lyndonchin'
     repoName = 'maven'
