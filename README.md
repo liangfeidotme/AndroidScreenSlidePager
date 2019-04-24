@@ -7,7 +7,7 @@ Pager (especially for ViewPager) indicator in two styles: circle & fraction.
 
 circle | fraction
 --- | ---
-![](art/art_circular.jpeg) | ![](art/art_numberic.jpeg)
+<img src="art/art_circular.jpeg" width="300px"> | <img src="art/art_numberic.jpeg" width="300px">
 
 ## Dependency
 
